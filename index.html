@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magic Labs</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --violet-main: #7a3cff;
+      --violet-soft: #b18cff;
+      --violet-glow: rgba(122, 60, 255, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: #ffffff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Animated background particles */
+    .particle {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, var(--violet-soft), transparent 70%);
+      filter: blur(80px);
+      animation: move 14s infinite alternate ease-in-out;
+      opacity: 0.35;
+    }
+
+    .particle:nth-child(1) { top: 10%; left: 15%; animation-duration: 18s; }
+    .particle:nth-child(2) { bottom: 10%; right: 10%; animation-duration: 22s; }
+
+    @keyframes move {
+      from { transform: translateY(0) translateX(0); }
+      to { transform: translateY(-80px) translateX(60px); }
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+    }
+
+    /* Main title */
+    .title {
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      background: linear-gradient(120deg, var(--violet-main), var(--violet-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px var(--violet-glow); }
+      to { text-shadow: 0 0 35px var(--violet-glow); }
+    }
+
+    /* Subtitle */
+    .subtitle {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: #000;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* Development badge */
+    .badge {
+      margin-top: 28px;
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 40px;
+      background: rgba(122, 60, 255, 0.08);
+      color: var(--violet-main);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <div class="container">
+    <div class="title">Magic Labs</div>
+    <div class="subtitle">Notre entreprise</div>
+    <div class="badge">Site en cours de développement</div>
+  </div>
+
+</body>
+</html>
