@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>MAGIC LABS – Maintenance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BACKGROUND LAB */
+body {
+    height: 100vh;
+    background:
+        radial-gradient(circle at top, #1b0033, #05010a 70%),
+        linear-gradient(120deg, #00fff0, #ff00cc);
+    background-blend-mode: screen;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #eaffff;
+}
+
+/* SCANLINES */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+    from { background-position-y: 0; }
+    to { background-position-y: 100px; }
+}
+
+/* CONTAINER */
+.container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TITLE */
+.title {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px #00fff0,
+        0 0 25px #00fff0,
+        0 0 60px #ff00cc;
+    animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.85; }
+}
+
+/* SUBTITLE */
+.subtitle {
+    margin-top: 10px;
+    font-size: 22px;
+    opacity: 0.85;
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* CLOCK */
+.clock {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-top: 50px;
+    border: 2px solid rgba(255,255,255,0.4);
+    box-shadow:
+        0 0 20px #00fff0,
+        inset 0 0 30px rgba(0,255,240,0.3);
+    animation: rotateGlow 10s linear infinite;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0% 50%;
+    background: #ffffff;
+    box-shadow: 0 0 10px #ff00cc;
+}
+
+.hour {
+    width: 45px;
+    height: 4px;
+}
+
+.minute {
+    width: 65px;
+    height: 3px;
+}
+
+.second {
+    width: 75px;
+    height: 2px;
+    background: #ff00cc;
+}
+
+.center {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px #00fff0;
+}
+
+/* FLOATING PARTICLES */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00fff0;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh) scale(0);
+    }
+    to {
+        transform: translateY(-10vh) scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <div class="title">MAGIC LABS</div>
+    <div class="subtitle">Site en maintenance</div>
+
+    <div class="clock">
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+        <div class="center"></div>
+    </div>
+</div>
+
+<script>
+// HORLOGE ULTRA RAPIDE
+const hour = document.getElementById("hour");
+const minute = document.getElementById("minute");
+const second = document.getElementById("second");
+
+let a = 0;
+setInterval(() => {
+    a += 30;
+    hour.style.transform = `rotate(${a * 0.2}deg)`;
+    minute.style.transform = `rotate(${a}deg)`;
+    second.style.transform = `rotate(${a * 3}deg)`;
+}, 40);
+
+// PARTICULES LAB
+for (let i = 0; i < 80; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = 4 + Math.random() * 6 + "s";
+    p.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(p);
+}
+</script>
+</body>
+</html>
